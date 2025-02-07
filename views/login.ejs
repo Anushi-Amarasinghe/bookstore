@@ -1,0 +1,107 @@
+<%- include('header'); %>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .card {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    background-color: #0f0e0f;
+    color: white;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .card-body {
+    padding: 30px;
+  }
+
+  .btn-custom {
+    background-color: #7a94e0;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-custom:hover {
+    background-color: #595c5a;
+  }
+
+  .btn-register {
+    background-color: #b1b1b3;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-register:hover {
+    background-color: #595c5a;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    box-shadow: none;
+    margin-bottom: 15px;
+  }
+
+  .alert {
+    border-radius: 8px;
+  }
+
+  .container {
+    max-width: 400px;
+  }
+</style>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card shadow"> 
+        <div class="card-header">
+          <h3>Login</h3>
+        </div>
+        <div class="card-body">
+          <% if (errorMessage) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= errorMessage %>
+            </div>
+          <% } %>
+          <form method="post" action="/login">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="d-grid gap-2 my-3">
+              <button type="submit" class="btn btn-custom">Login</button>
+            </div>
+          </form>
+          <div class="d-grid gap-2 my-3">
+            <a href="/register" class="btn btn-register">Register</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

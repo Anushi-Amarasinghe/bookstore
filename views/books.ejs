@@ -1,0 +1,149 @@
+<%- include('header'); -%>
+<%- include('navbar.ejs', username) %>
+
+<style>
+  .book-image {
+    height: 400px; 
+    width: 100%; 
+    object-fit: cover; 
+  }
+  .card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  .card-img-top {
+    transition: transform 0.3s;
+  }
+  .card:hover .card-img-top {
+    transform: scale(1.1);
+  }
+  .card-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    display: none;
+    transition: background 0.2s;
+  }
+  .card:hover .card-title-overlay {
+    display: block;
+  }
+  .hidden-card-body {
+    display: none;
+  }
+  .carousel-inner {
+    height: 500px;
+  }    
+  .carousel-item img {
+    height: 100%;
+    object-fit: cover;
+  }
+  .no-caret::after {
+    display: none !important;
+  }
+  .badge-primary {
+    background-color: #783ca2;
+    color: #fff;
+    padding: 0.5em 1em;
+    font-size: 1.25em;
+    border-radius: 0.5em;
+  }
+  .filter-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  .book-listing .card {
+    margin-bottom: 20px;
+  }
+  @media (max-width: 767px) {
+    .carousel-inner {
+      height: auto;
+    }
+    .carousel-item img {
+      height: auto;
+      object-fit: contain;
+    }
+  }
+</style>
+
+<div class="col-md-10 mx-auto" style="background-color: #F8EEE7;">
+
+  <!-- Banner Carousel -->
+  <header>
+    <div id="bookBanner" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <br><br>
+          <img src="images/main.jpg" class="d-block w-100" alt="Carousel Image 1">
+        </div>
+      </div>     
+    </div>
+  </header> 
+
+  <!-- Filter Section -->
+  <!-- <div class="filter-section">
+    <h5>Filter By</h5>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" placeholder="Enter author name">
+    </div>
+    <button class="btn btn-primary">Apply Filters</button>
+  </div> -->
+
+  <!-- All Books or Search Results Section -->
+  <section class="container mb-2">
+    <% if(search == ""){ %>
+    <h2 class="text-center mb-4">All Books</h2>
+    <% }else { %>
+      <h2 class="mt-3" style="font-weight: 900;">Searching <strong style="color: rgb(213, 56, 56);"> '<%= search %>'</strong></h2>
+    <% } %>
+    <div class="row justify-content-center">
+      <div class="container my-4">
+        <div class="row row-cols-1 row-cols-md-5 g-4">
+          <% books.forEach(function(book) { %>
+            <div class="col">
+              <div class="card h-100">
+                <img src="<%= book.cover_image_url %>" class="card-img-top book-image" alt="<%= book.title %>">
+                <div class="card-body">
+                  <h5 class="card-title"><%= book.title %></h5>
+                  <p class="card-text"><%= book.description %></p>
+                  <a href="/bookdetail/<%= book.book_id %>" class="btn btn-primary">View Details</a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pagination Section -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-4">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+
+<%- include('footer') -%>
